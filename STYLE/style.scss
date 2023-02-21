@@ -1,0 +1,35 @@
+body{
+    position: relative;
+}
+.body{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.kat_menu{
+    position: relative;
+    left: 0%;
+    width: 10%;
+    height: 50%;
+    top: 20%;
+    background-color: gray;
+    .kat_button{
+        border: 2px gray solid;
+        text-align: center;
+        margin: 2%;
+    }
+}
+.recept_list{
+    position: relative;
+    width: 20%;
+    height: 80%;
+    bottom: 0%;
+    left: 30%;
+    background-color: gray;
+    .recept_button{
+            border: 2px gray solid;
+            text-align: center;
+        }
+}
