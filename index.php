@@ -6,7 +6,6 @@
 
     $page = $_GET["page"];
     $conn = (new Database)->connect();
-    $data = (new Recept_suroviny($conn))->get_data();
     $recept = (new Recept($conn))->get_data();
     $kategorie = (new Kategorie($conn))->get_data();
     foreach($kategorie as $kat_row){
@@ -42,12 +41,23 @@
     if(is_numeric($page)){
         echo "<div class='recept_list'>";
         $query = mysqli_query($conn, "SELECT nazev FROM recept WHERE kategorie_id = $page");
-        foreach($query as $recept){
-            echo "<a href='?page=$recept[nazev]'>$recept[nazev]</a>";
+        foreach($query as $recept_data){
+            echo "<a href='?page=$recept_data[nazev]'>$recept_data[nazev]</a>";
         }
-    }else "<a href='?page=home'>";
+    }
     if($page == in_array($page, array("Brokolicová polévka", "Květákové makarony"))){
-        echo "kokot";
+        $data = (new Recept_suroviny($conn, $page))->get_data();
+        $query = mysqli_query($conn, "SELECT postup, casova_narocnost FROM recept WHERE nazev = '$page'");
+        echo "<h1>$page</h1>";
+        echo "<ul>";
+        foreach($data as $dats){
+            echo "<li>".$dats."</li>";
+        }
+        echo "</ul>";
+        foreach($query as $data){
+            echo "<p>Postup: ".$data["postup"]."</p><br>";
+            echo "<p>Časová náročnost: ".$data["casova_narocnost"]." minut</p>";
+        }
     }
     echo "</div>";
     ?>
