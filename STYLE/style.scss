@@ -1,35 +1,119 @@
 body{
-    position: relative;
-}
-.body{
-    position: absolute;
+    background-image: linear-gradient(rgb(110, 86, 42), rgb(219, 180, 105));
+    background-attachment: fixed;
     width: 100%;
     height: 100%;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
+    font-size: 1.2em;
+    font-family: 'Times New Roman';
 }
-.kat_menu{
-    position: relative;
+header{
+    text-align: center;
+    width: 100%;
+    background-image: linear-gradient(rgb(166, 166, 0), rgb(242, 242, 63));
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    margin-bottom: 1%;
+    z-index: -1000;
+}
+img:hover{
+    cursor: pointer;
+}
+.body{
+    display: flex;
+    margin-top: 1%;
+    width: 100%;
+}
+.checkboxes{
+    border: 1px black solid;
+    background-image: linear-gradient(rgb(166, 166, 0), rgb(242, 242, 63));
+    top: 0%;
+    width: 90%;
     left: 0%;
-    width: 10%;
-    height: 50%;
-    top: 20%;
-    background-color: gray;
-    .kat_button{
-        border: 2px gray solid;
-        text-align: center;
-        margin: 2%;
-    }
+    z-index: 3;
+}
+
+.kat_menu{
+    position: fixed;
+    width: 15%;
+    height: 80%;
+    bottom: 1%;
+    left: 0.5%;
+    display: flex;
+    flex-direction: column; 
+    row-gap: 1.5%;
+    z-index: -3;
+}
+.kat_button{
+    width: 100%;
+    height: 80%;
+    font-size: 1.5em;
+    text-align: center;
+    background-image: linear-gradient(rgb(166, 166, 0), rgb(242, 242, 63));
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    vertical-align: middle;
+}
+.kat_button:hover{
+    transform: scale(1.1);
+    cursor: pointer;
 }
 .recept_list{
-    position: relative;
-    width: 20%;
+    position: fixed;
+    left: 20%;
+    bottom: 1%;
+    width: 80%;
     height: 80%;
-    bottom: 0%;
-    left: 30%;
-    background-color: gray;
-    .recept_button{
-            border: 2px gray solid;
-            text-align: center;
-        }
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    gap: 2%;
+}
+.filtr{
+    position: fixed;
+    top: 15%;
+}
+.recept_button{
+    height: 15em;
+    width: 20em;
+    text-align: center;
+    margin: 2%;
+    background-image: linear-gradient(rgb(166, 166, 0), rgb(242, 242, 63));
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    font-size: 1.2em;
+}
+.recept_button:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.recept_pic{
+    width: 80%;
+    margin: 10%;
+    height: 60%;
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    transform: scale(1.05);
+}
+.recept_info{
+    left: 20%;
+    height: 80%;
+    width: 75%;
+    position: fixed;
+    bottom: 1%;
+    background-image: linear-gradient(rgb(166, 166, 0), rgb(242, 242, 63));
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    overflow-y: scroll;
+}
+.data{
+    text-align: justify;
+    margin: 2%;
+    font-size: 1.2em;
+}
+h1{
+    margin: 2%;
+}
+.back_button{
+}
+.back_button:hover{
+    cursor: pointer;
 }

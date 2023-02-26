@@ -26,65 +26,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="STYLE/style.css">
+    <link rel="stylesheet" href="STYLE/style.scss">
     <title>Chytrá kuchařka</title>
 </head>
 <body>
     <?php
-    echo "<div class='body'>";
+    echo "<header><img src='PICS/logo.png' onclick=\"location.href='?page=home'\"></header>";
+    echo "<div class='kat_menu'>";
+            foreach($kat_rows as $row){
+                echo "<div class='kat_button' onclick=\"location.href ='?page=$row[0]'\">$row[1]</div>";
+            }
+        echo "</div>";
     if($page == "home"){
-        echo "<div class='checkboxes'><form class='checkboxes' method='POST' action=?page=filtr>";
+        echo "<div class='back_button' id='toggle' class='filtr' onclick='toggle_filtr()'>Filtr</button>";
+        echo "<div id='checkboxes' class='checkboxes'><form class='form' id='form' method='POST' action=?page=filtr>";
         $i = 0;
         foreach($suroviny as $surovina){
             $i++;
-            echo "<input type='checkbox' name='$i' value='$surovina'>$surovina</input>";
+            echo "<label for='$surovina'>$surovina</label><input id='$surovina' type='checkbox' name='$i' value='$surovina'></input>";
         }
-        echo "<input type='submit' value='Filtr'>";
+        echo "<input type='submit' onclick='clear()' value='Filtr'>";
         echo "</form></div>";
-        echo "<div class='kat_menu'>";
-            foreach($kat_rows as $row){
-                echo "<div class='kat_button'><input type='button' onclick=location.href='?page=$row[0]' value=$row[1]></div>";
-            }
-        echo "</div>";
+        echo "<div class='body'>";
         echo "<div class='recept_list'>";
             foreach($recept_rows as $recept){
-                echo "<div class='recept_button'><input type='button' onclick=location.href='?page=$recept[1]' value=$recept[1]></div>";
+                echo "<div class='recept_button' onclick=\"location.href ='?page=$recept[1]'\"><img src='PICS/$recept[5]' class='recept_pic'>$recept[1]</div>";
             }
     }
     if($page == "filtr"){
+        echo "<div class='back_button' onclick=\"window.history.back()\">Zpět</div>";
         $i = 1;
-        $query = "SELECT recept.nazev FROM recept INNER JOIN recept_has_suroviny ON recept.id = recept_has_suroviny.recept_id INNER JOIN suroviny ON suroviny.id = recept_has_suroviny.suroviny_id WHERE suroviny.nazev = ";
-        foreach($_POST as $value){
-            if($i == 1){
-                $query .= "'$value'";
-            }else{$query .= " OR suroviny.nazev = '$value'";}
-            $i++;     
-        }
-        echo "<div class='recept_list'>";
-        $data = mysqli_query($conn, $query);
-        echo "</div>";
-        foreach($data as $row){
-            foreach($row as $recept){
-                $recepts[] = $recept;
-                $_recepts = array_unique($recepts);
+        if(!empty($_POST)){
+            $query = "SELECT DISTINCT recept.nazev AS NÁZEV, recept.obrazek AS OBRAZEK FROM recept INNER JOIN recept_has_suroviny ON recept.id = recept_has_suroviny.recept_id INNER JOIN suroviny ON suroviny.id = recept_has_suroviny.suroviny_id WHERE suroviny.nazev = ";    
+            foreach($_POST as $value){
+                if($i == 1){
+                    $query .= "'$value'";
+                }else{$query .= " OR suroviny.nazev = '$value'";}
+                $i++;  
+            }
+            $data = mysqli_query($conn, $query);
+            echo "<div class='recept_list'>";
+            echo "</div>";
+
+            foreach($data as $rows){
+                echo "<div class='recept_button' onclick=\"location.href ='?page=$rows[NÁZEV]'\"><img src='PICS/$rows[OBRAZEK]' class='recept_pic'>$rows[NÁZEV]</div>";
             };
-        }
-        foreach($_recepts as $data){
-            echo "<input type='button' onclick=location.href='?page=$data' value=$data></br>";
+            }
+        else{ 
+            echo "<h1>Žádné výsledky hledání...</h1><br><p>Vraťte se zpět na hlavní stránku</p>";
         }
     }
     if(is_numeric($page)){
+        echo "<div class='back_button' onclick=\"window.history.back()\">Zpět</div>";
         echo "<div class='recept_list'>";
-        $query = mysqli_query($conn, "SELECT nazev FROM recept WHERE kategorie_id = $page");
+        $query = mysqli_query($conn, "SELECT DISTINCT nazev, obrazek FROM recept WHERE kategorie_id = $page");
         foreach($query as $recept_data){
-            echo "<input type='button' onclick=location.href='?page=$recept_data[nazev]' value='$recept_data[nazev]'>";
+            echo "<div class='recept_button' onclick=\"location.href ='?page=$recept_data[nazev]'\"><img src='PICS/$recept_data[obrazek]' class='recept_pic'>$recept_data[nazev]</div>";
         }
     }
     if($page == in_array($page,$nazev_recept)){
+        echo "<div class='back_button' onclick=\"window.history.back()\">Zpět</div>";
         $data = (new Recept_suroviny($conn, $page))->get_data();
         $query = mysqli_query($conn, "SELECT postup, casova_narocnost FROM recept WHERE nazev = '$page'");
-        echo "<h1>$page</h1>";
-        echo "<ul>";
+        echo "<div class='recept_info'><h1>$page</h1>";
+        echo "<div class='data'><ul>";
         foreach($data as $dats){
             echo "<li>".$dats."</li>";
         }
@@ -93,8 +98,11 @@
             echo "<p>Postup: ".$data["postup"]."</p><br>";
             echo "<p>Časová náročnost: ".$data["casova_narocnost"]." minut</p>";
         }
+        echo "</div></div>";
     }
     echo "</div>";
+    //hnědá, žlutá, oranžová
     ?>
 </body>
+<script src="JS/script.js"></script>
 </html>
