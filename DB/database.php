@@ -14,7 +14,7 @@ class Database{
         $this->hostname = "127.0.0.1";
         $this->database = "chytra_kucharka";
         $this->username = "root";
-        $this->password = "root";
+        $this->password = "";
         $this->port = "3306";
     }
     public function connect(){

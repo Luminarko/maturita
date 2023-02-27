@@ -1,73 +1,200 @@
-body {
-  background-image: linear-gradient(rgb(110, 86, 42), rgb(219, 180, 105));
-  background-attachment: fixed;
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-  padding: 0px;
-  font-size: 1.2em;
+body{
+    background-image: linear-gradient(rgb(110, 86, 42), rgb(219, 180, 105));
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-size: 1.2em;
+    font-family: 'Times New Roman';
+}
+header{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-image: linear-gradient(rgba(255,248,0,1), rgba(255,209,0,1));
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    margin-bottom: 1%;
+    z-index: 1000;
+}
+img:hover{
+    cursor: pointer;
+}
+.logo{
+    margin: auto;
+}
+.body{
+    display: flex;
+    margin-top: 1%;
+    width: 100%;
+}
+.checkboxes{
+    border: 1px black solid;
+    background-image: linear-gradient(rgba(255,248,0,1), rgba(255,209,0,1));
+    top: 0%;
+    width: 100%;
+    height: 90%;
+    left: 0%;
+    z-index: 1000;
+    overflow-y: auto;
 }
 
-header {
-  text-align: center;
-  width: 100%;
-  background-image: linear-gradient(rgb(166, 166, 0), rgb(242, 242, 63));
-  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0.12);
-  margin-bottom: 1%;
+.kat_menu{
+    position: fixed;
+    width: 15%;
+    height: 80%;
+    bottom: 1%;
+    left: 0.5%;
+    display: flex;
+    flex-direction: column; 
+    row-gap: 1.5%;
+    z-index: -3;
 }
-
-.body {
-  display: flex;
-  margin-top: 1%;
-  width: 100%;
+.kat_button{
+    width: 100%;
+    height: 80%;
+    font-size: 1.5em;
+    text-align: center;
+    background-image: linear-gradient(rgba(255,248,0,1), rgba(255,209,0,1));
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    vertical-align: middle;
 }
-
-.checkboxes {
-  border: 1px black solid;
-  background-image: linear-gradient(rgb(166, 166, 0), rgb(242, 242, 63));
-  top: 0%;
-  width: 90%;
-  left: 0%;
-  z-index: 3;
+.kat_button:hover{
+    transition: all 0.1s ease-in;
+    transform: scale(1.1);
+    cursor: pointer;
 }
-
-.kat_menu {
-  position: fixed;
-  width: 15%;
-  height: 80%;
-  bottom: 1%;
-  left: 0.5%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 1.5%;
-  z-index: -3;
+.recept_list{
+    position: fixed;
+    left: 20%;
+    bottom: 1%;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
-
-.kat_button {
-  width: 100%;
-  height: 80%;
-  font-size: 1.5em;
-  font-family: monospace;
-  text-align: center;
-  background-image: linear-gradient(rgb(166, 166, 0), rgb(242, 242, 63));
-  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0.12);
-  vertical-align: middle;
+.filtr{
+    position: fixed;
+    top: 15%;
 }
-
-.kat_button:hover {
-  transform: scale(1.1);
-  cursor: pointer;
+.recept_button{
+    height: 15em;
+    width: 18em;
+    text-align: center;
+    margin: 2%;
+    background-image: linear-gradient(rgba(255,248,0,1), rgba(255,209,0,1));
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    font-size: 1.2em;
 }
-
-.recept_list {
-  position: fixed;
-  left: 30%;
-  top: 30%;
-  width: 70%;
-  height: 70%;
+.recept_button:hover{
+    transition: all 0.1s ease-in;
+    transform: scale(1.1);
+    cursor: pointer;
 }
-
-.filtr {
-  position: fixed;
-  top: 15%;
-}/*# sourceMappingURL=style.css.map */
+.recept_pic{
+    width: 80%;
+    margin: 10%;
+    height: 60%;
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    transform: scale(1.05);
+}
+.recept_info{
+    left: 20%;
+    height: 80%;
+    width: 75%;
+    position: fixed;
+    bottom: 1%;
+    background-image: linear-gradient(rgba(255,248,0,1), rgba(255,209,0,1));
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+    overflow-y: scroll;
+}
+.data{
+    text-align: justify;
+    margin: 2%;
+    font-size: 1.2em;
+}
+h1{
+    margin: 2%;
+}
+.filtr_button{
+    width: 2em;
+    height: 2em;
+    margin-left: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.filtr_button:hover{
+    cursor: pointer;
+    transition: all 0.1s ease-in;
+    transform: scale(1.1);
+}
+.form{
+    margin: 2%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    overflow-y: visible;
+}
+.left {
+    align-self: flex-start;
+  }
+.one{
+    background-color: black;
+    width: 100%;
+    height: 20%;
+}
+.two{
+    background-color: black;
+    width: 100%;
+    height: 20%;
+}
+.three{
+    background-color: black;
+    width: 100%;
+    height: 20%;
+}
+.no_list{
+    left: 20%;
+    height: 80%;
+    width: 75%;
+    position: fixed;
+    bottom: 1%;
+}
+.back_button{
+    width: 5%;
+    height: 10%;
+    margin: 2%;
+    text-align: center;
+    background-image: linear-gradient(rgba(255,248,0,1), rgba(255,209,0,1));
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
+}
+.back_button:hover{
+    cursor: pointer;
+    transition: all 0.1s ease-in;
+    transform: scale(1.1);
+}
+@media only screen and (max-width: 1700px) {
+    .form {
+        grid-template-columns: repeat(6, 1fr);
+    }
+  }
+@media only screen and (max-width: 1200px) {
+    .form {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    body{
+        font-size: 1em;
+    }
+  }
+@media only screen and (max-width: 800px) {
+    .form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    body{
+        font-size: .8em;
+    }
+  }
