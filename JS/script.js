@@ -2,15 +2,14 @@ var targetDiv = document.getElementById("checkboxes");
 var btn = document.getElementById("toggle");
 var body = document.getElementById("body");
 
-targetDiv.style.visibility = "hidden";
-function clear(){
-  document.getElementById("form").reset();
-};
+targetDiv.style.top = "-20em"
+targetDiv.style.position= "fixed"
+
 function toggle_filtr() {
-  if (targetDiv.style.visibility == "hidden") {
-    targetDiv.style.visibility = "visible";
+  if (targetDiv.style.top == "-20em") {
+    targetDiv.style.top = "10em"
   } else {
-    targetDiv.style.visibility = "hidden"
+    targetDiv.style.top = "-20em"
   }
 
 };

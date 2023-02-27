@@ -14,7 +14,7 @@ class Database{
         $this->hostname = "127.0.0.1";
         $this->database = "chytra_kucharka";
         $this->username = "root";
-        $this->password = "";
+        $this->password = "root";
         $this->port = "3306";
     }
     public function connect(){
@@ -23,6 +23,7 @@ class Database{
             echo "Failed to connect: ".mysqli_connect_error();
             exit();
         }
-        else return $this->conn;
+        mysqli_query($this->conn, "SET CHARACTER SET UTF8");
+        return $this->conn;
     }
 }

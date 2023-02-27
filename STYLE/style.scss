@@ -14,7 +14,7 @@ header{
     background-image: linear-gradient(rgb(166, 166, 0), rgb(242, 242, 63));
     box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0.12);
     margin-bottom: 1%;
-    z-index: -1000;
+    z-index: 1000;
 }
 img:hover{
     cursor: pointer;
@@ -113,7 +113,17 @@ h1{
     margin: 2%;
 }
 .back_button{
+    width: 5%;
+    height: 20%;
+    background-color: black;
 }
 .back_button:hover{
     cursor: pointer;
+}
+.filtr_button{
+    width: 5%;
+    height: 20%;
+    background-color: black;
+    position: fixed;
+    right: 0%;
 }

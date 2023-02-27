@@ -31,21 +31,20 @@
 </head>
 <body>
     <?php
-    echo "<header><img src='PICS/logo.png' onclick=\"location.href='?page=home'\"></header>";
+    echo "<header><div class='back_button' onclick=\"window.history.back()\">Zpět</div><img src='PICS/logo.png' onclick=\"location.href='?page=home'\"><div class='filtr_button' id='toggle' class='filtr' onclick='toggle_filtr()'>Filtr</div></header>";
     echo "<div class='kat_menu'>";
             foreach($kat_rows as $row){
                 echo "<div class='kat_button' onclick=\"location.href ='?page=$row[0]'\">$row[1]</div>";
             }
         echo "</div>";
     if($page == "home"){
-        echo "<div class='back_button' id='toggle' class='filtr' onclick='toggle_filtr()'>Filtr</button>";
         echo "<div id='checkboxes' class='checkboxes'><form class='form' id='form' method='POST' action=?page=filtr>";
         $i = 0;
         foreach($suroviny as $surovina){
             $i++;
             echo "<label for='$surovina'>$surovina</label><input id='$surovina' type='checkbox' name='$i' value='$surovina'></input>";
         }
-        echo "<input type='submit' onclick='clear()' value='Filtr'>";
+        echo "<div class='submit' type='submit' onclick='clear()' value='Filtr'></div>";
         echo "</form></div>";
         echo "<div class='body'>";
         echo "<div class='recept_list'>";
@@ -54,7 +53,6 @@
             }
     }
     if($page == "filtr"){
-        echo "<div class='back_button' onclick=\"window.history.back()\">Zpět</div>";
         $i = 1;
         if(!empty($_POST)){
             $query = "SELECT DISTINCT recept.nazev AS NÁZEV, recept.obrazek AS OBRAZEK FROM recept INNER JOIN recept_has_suroviny ON recept.id = recept_has_suroviny.recept_id INNER JOIN suroviny ON suroviny.id = recept_has_suroviny.suroviny_id WHERE suroviny.nazev = ";    
@@ -77,7 +75,6 @@
         }
     }
     if(is_numeric($page)){
-        echo "<div class='back_button' onclick=\"window.history.back()\">Zpět</div>";
         echo "<div class='recept_list'>";
         $query = mysqli_query($conn, "SELECT DISTINCT nazev, obrazek FROM recept WHERE kategorie_id = $page");
         foreach($query as $recept_data){
@@ -85,7 +82,6 @@
         }
     }
     if($page == in_array($page,$nazev_recept)){
-        echo "<div class='back_button' onclick=\"window.history.back()\">Zpět</div>";
         $data = (new Recept_suroviny($conn, $page))->get_data();
         $query = mysqli_query($conn, "SELECT postup, casova_narocnost FROM recept WHERE nazev = '$page'");
         echo "<div class='recept_info'><h1>$page</h1>";
