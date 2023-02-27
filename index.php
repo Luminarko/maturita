@@ -1,18 +1,29 @@
 <?php 
+
+// Načtení tříd a souborů
     require_once("DATA/recept.php");
     require_once("DATA/recept_shared.php");
     require_once("DB/database.php");
     require_once("DATA/kategorie.php");
     require_once("DATA/suroviny.php");
 
+// Získání parametru page z URL adresy nebo nastavení výchozí hodnoty "home"
     $page = $_GET["page"] ?? "home";
+
+// Připojení k databázi
     $conn = (new Database)->connect();
+
+// Získání dat receptů, kategorií a surovin
     $recept = (new Recept($conn))->get_data();
     $kategorie = (new Kategorie($conn))->get_data();
     $suroviny = (new Surovina($conn))->get_data();
+
+// Rozdělení řetězců kategorie na ID a název
     foreach($kategorie as $kat_row){
         $kat_rows[] = explode("/", $kat_row);
     }
+
+// Rozdělení řetězců receptů na ID, název, kategorii, počet porcí, přípravu a obrázek
     foreach($recept as $recept_row){
         $recept_rows[] = explode("/", $recept_row);
         foreach($recept_rows as $recept_nazev){
@@ -31,7 +42,11 @@
 </head>
 <body>
     <?php
+
+// Tlačítko pro zobrazení nebo skrytí filtru a logo s odkazem na úvodní stránku
     echo "<header><div class='filtr_button' id='toggle' class='filtr' onclick='toggle_filtr()' value='filtr'><div id='one' class='one'></div><div id='two' class='two'></div><div id='three' class='three'></div></div><img src='PICS/logo.png' class='logo' onclick=\"location.href='?page=home'\"></header>";
+
+// Formulář pro výběr surovin pro filtraci receptů
     echo "<div id='checkboxes' class='checkboxes'><form class='form' id='form' method='POST' action=?page=filtr>";
     $i = 0;
         foreach($suroviny as $surovina){
@@ -40,11 +55,15 @@
         }
         echo "<button class='submit' type='submit' onclick='clear()' value='Filtr'>Filtrovat</button>";
         echo "</form></div>";
+
+// Výpis tlačítek pro jednotlivé kategorie receptů
     echo "<div class='kat_menu'>";
             foreach($kat_rows as $row){
                 echo "<div class='kat_button' onclick=\"location.href ='?page=$row[0]'\">$row[1]</div>";
             }
         echo "</div>";
+
+// Zobrazení seznamu receptů na hlavní stránce
     if($page == "home"){
         echo "<div class='body'>";
         echo "<div class='recept_list'>";
@@ -52,6 +71,7 @@
                 echo "<div class='recept_button' onclick=\"location.href ='?page=$recept[1]'\"><img src='PICS/$recept[5]' class='recept_pic'>$recept[1]</div>";
             }
     }
+// Filtr receptů podle surovin
     if($page == "filtr"){
         $i = 1;
         if(!empty($_POST)){
@@ -76,6 +96,7 @@
             echo "</div>";
         }
     }
+// Zobrazení seznamu receptů v dané kategorii
     if(is_numeric($page)){
         echo "<div class='recept_list'>";
         $query = mysqli_query($conn, "SELECT DISTINCT nazev, obrazek FROM recept WHERE kategorie_id = $page");
@@ -83,6 +104,7 @@
             echo "<div class='recept_button' onclick=\"location.href ='?page=$recept_data[nazev]'\"><img src='PICS/$recept_data[obrazek]' class='recept_pic'>$recept_data[nazev]</div>";
         }
     }
+// Zobrazení detailů receptu
     if($page == in_array($page,$nazev_recept)){
         $data = (new Recept_suroviny($conn, $page))->get_data();
         $query = mysqli_query($conn, "SELECT postup, casova_narocnost FROM recept WHERE nazev = '$page'");
