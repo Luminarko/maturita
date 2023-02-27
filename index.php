@@ -31,21 +31,21 @@
 </head>
 <body>
     <?php
-    echo "<header><div class='back_button' onclick=\"window.history.back()\">Zpět</div><img src='PICS/logo.png' onclick=\"location.href='?page=home'\"><div class='filtr_button' id='toggle' class='filtr' onclick='toggle_filtr()'>Filtr</div></header>";
+    echo "<header><div class='filtr_button' id='toggle' class='filtr' onclick='toggle_filtr()'>Filtr</div><img src='PICS/logo.png' class='logo' onclick=\"location.href='?page=home'\"></header>";
+    echo "<div id='checkboxes' class='checkboxes'><form class='form' id='form' method='POST' action=?page=filtr>";
+    $i = 0;
+        foreach($suroviny as $surovina){
+            $i++;
+            echo "<label for='$surovina'>$surovina</label><input id='$surovina' type='checkbox' name='$i' value='$surovina'></input>";
+        }
+        echo "<button class='submit' type='submit' onclick='clear()' value='Filtr'>Filtrovat</button>";
+        echo "</form></div>";
     echo "<div class='kat_menu'>";
             foreach($kat_rows as $row){
                 echo "<div class='kat_button' onclick=\"location.href ='?page=$row[0]'\">$row[1]</div>";
             }
         echo "</div>";
     if($page == "home"){
-        echo "<div id='checkboxes' class='checkboxes'><form class='form' id='form' method='POST' action=?page=filtr>";
-        $i = 0;
-        foreach($suroviny as $surovina){
-            $i++;
-            echo "<label for='$surovina'>$surovina</label><input id='$surovina' type='checkbox' name='$i' value='$surovina'></input>";
-        }
-        echo "<div class='submit' type='submit' onclick='clear()' value='Filtr'></div>";
-        echo "</form></div>";
         echo "<div class='body'>";
         echo "<div class='recept_list'>";
             foreach($recept_rows as $recept){
@@ -64,11 +64,11 @@
             }
             $data = mysqli_query($conn, $query);
             echo "<div class='recept_list'>";
-            echo "</div>";
 
             foreach($data as $rows){
                 echo "<div class='recept_button' onclick=\"location.href ='?page=$rows[NÁZEV]'\"><img src='PICS/$rows[OBRAZEK]' class='recept_pic'>$rows[NÁZEV]</div>";
             };
+            echo "</div>";
             }
         else{ 
             echo "<h1>Žádné výsledky hledání...</h1><br><p>Vraťte se zpět na hlavní stránku</p>";
