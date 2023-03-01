@@ -42,6 +42,9 @@
 </head>
 <body>
     <?php
+    //<div class="checkbox">
+    //<input id="toggle" type="checkbox">
+    //<label for="toggle"></label>
 
 // Tlačítko pro zobrazení nebo skrytí filtru a logo s odkazem na úvodní stránku
     echo "<header><div class='filtr_button' id='toggle' class='filtr' onclick='toggle_filtr()' value='filtr'><div id='one' class='one'></div><div id='two' class='two'></div><div id='three' class='three'></div></div><img src='PICS/logo.png' class='logo' onclick=\"location.href='?page=home'\"></header>";
@@ -51,9 +54,9 @@
     $i = 0;
         foreach($suroviny as $surovina){
             $i++;
-            echo "<label class='left' for='$surovina'>$surovina</label><input id='$surovina' type='checkbox' name='$i' value='$surovina'></input>";
+            echo "<label for='$surovina'>$surovina</label><div class='checkbox'><input type='checkbox' id='$surovina' name='$surovina' value='$surovina'><label for='$surovina'></label></div>";
         }
-        echo "<button class='submit' type='submit' onclick='clear()' value='Filtr'>Filtrovat</button>";
+        echo "<div class='submit' onclick='this.parentNode.submit()' value='Filtr'>Filtrovat</div>";
         echo "</form></div>";
 
 // Výpis tlačítek pro jednotlivé kategorie receptů
