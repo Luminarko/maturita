@@ -37,16 +37,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/PICS/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="PICS/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="STYLE/style.css">
     <title>Chytrá kuchařka</title>
 </head>
 <body>
     <?php
-    //<div class="checkbox">
-    //<input id="toggle" type="checkbox">
-    //<label for="toggle"></label>
-
+    
 // Tlačítko pro zobrazení nebo skrytí filtru a logo s odkazem na úvodní stránku
     echo "<header><div class='filtr_button' id='toggle' class='filtr' onclick='toggle_filtr()' value='filtr'><div id='one' class='one'></div><div id='two' class='two'></div><div id='three' class='three'></div></div><img src='PICS/logo.png' alt='logo Chytrá kuchařka' class='logo' onclick=\"location.href='?page=home'\"></header>";
 

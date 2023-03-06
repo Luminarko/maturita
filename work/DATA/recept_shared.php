@@ -12,7 +12,7 @@ class Recept_suroviny{
     public function __construct($db_connect, $name)
     {
         // SQL dotaz pro získání surovin a jejich množství pro daný recept
-        $this->data = mysqli_query($db_connect,"SELECT jednotky.nazev AS jednotky, suroviny.nazev AS suroviny, recept_has_suroviny.mnozstvi FROM recept_has_suroviny INNER JOIN jednotky ON recept_has_suroviny.jednotky_id = jednotky.id INNER JOIN suroviny ON recept_has_suroviny.suroviny_id = suroviny.id INNER JOIN recept ON recept_has_suroviny.recept_id = recept.id WHERE recept.nazev = '$name'");
+        $this->data = mysqli_query($db_connect, "SELECT jednotky.nazev AS jednotky, suroviny.nazev AS suroviny, recept_has_suroviny.mnozstvi FROM recept_has_suroviny INNER JOIN jednotky ON recept_has_suroviny.jednotky_id = jednotky.id INNER JOIN suroviny ON recept_has_suroviny.suroviny_id = suroviny.id INNER JOIN recept ON recept_has_suroviny.recept_id = recept.id WHERE recept.nazev = '$name'");
     }
 
     public function get_data(){
